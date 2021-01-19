@@ -41,7 +41,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		expectedHash := hex.EncodeToString(hash.Sum(nil))
 
 		fmt.Printf("got: %v\n", gotHash)
-		fmt.Printf("exp: %x\n\n", expectedHash)
+		fmt.Printf("exp: sha256=%x\n\n", expectedHash)
 
 		fmt.Fprintf(w, "Success\n")
 	default:
