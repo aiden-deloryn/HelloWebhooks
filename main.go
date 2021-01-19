@@ -32,6 +32,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf(" :: Host: %v, Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
 		fmt.Printf("Secret: %v\n", r.Header.Get("X-Hub-Signature-256"))
 		fmt.Printf("Expected secret: %x\n\n", hash)
+		fmt.Printf(string(reqBody))
+
 		fmt.Fprintf(w, "Success\n")
 	default:
 		fmt.Fprintf(w, "Sorry, only POST methods are supported.")
