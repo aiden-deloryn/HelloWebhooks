@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -28,7 +29,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "POST":
-		gotHash := r.Header.Get("X-Hub-Signature-256")
+		gotHash := strings.Split(r.Header.Get("X-Hub-Signature-256"), "=")[1]
 		reqBody, _ := ioutil.ReadAll(r.Body)
 		hash := hmac.New(sha256.New, []byte("123456"))
 		hash.Write(reqBody)
@@ -37,8 +38,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(time.Now().Local().Clock())
 		fmt.Printf(" :: Host: %v, Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
 		fmt.Printf("got hash: %v\n", gotHash)
-		fmt.Printf("exp hash: sha256=%s\n\n", expectedHash)
-		fmt.Printf("Hashes match? %v", hmac.Equal([]byte(gotHash), []byte(expectedHash)))
+		fmt.Printf("exp hash: %s\n", expectedHash)
+		fmt.Printf("Hashes match? %v\n\n", hmac.Equal([]byte(gotHash), []byte(expectedHash)))
 
 		fmt.Fprintf(w, "Success\n")
 	default:
