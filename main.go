@@ -38,6 +38,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf(" :: Host: %v, Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
 		fmt.Printf("got hash: %v\n", gotHash)
 		fmt.Printf("exp hash: sha256=%s\n\n", expectedHash)
+		fmt.Printf("Hashes match? %v", hmac.Equal([]byte(gotHash), []byte(expectedHash)))
 
 		fmt.Fprintf(w, "Success\n")
 	default:
