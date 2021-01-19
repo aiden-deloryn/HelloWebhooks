@@ -25,7 +25,9 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "POST":
-		hash := sha256.Sum256([]byte("123456"))
+		var reqBody []byte
+		r.Body.Read(reqBody)
+		hash := sha256.Sum256([]byte("123456" + string(reqBody)))
 		fmt.Print(time.Now().Local().Clock())
 		fmt.Printf(" :: Host: %v, Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
 		fmt.Printf("Secret: %v\n", r.Header.Get("X-Hub-Signature-256"))
