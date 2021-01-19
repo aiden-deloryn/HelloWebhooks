@@ -31,8 +31,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(time.Now().Local().Clock())
 		fmt.Printf(" :: Host: %v, Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
 		fmt.Printf("Secret: %v\n", r.Header.Get("X-Hub-Signature-256"))
-		fmt.Printf("Expected secret: %x\n", hash)
-		fmt.Printf("Body: %v\n\n", string(reqBody))
+		fmt.Printf("Expected secret: %x\n\n", hash)
 
 		fmt.Fprintf(w, "Success\n")
 	default:
