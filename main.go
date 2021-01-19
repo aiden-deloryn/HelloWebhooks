@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha256"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
@@ -25,8 +26,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "POST":
-		var reqBody []byte
-		r.Body.Read(reqBody)
+		reqBody, _ := ioutil.ReadAll(r.Body)
 		hash := sha256.Sum256([]byte("123456" + string(reqBody)))
 		fmt.Print(time.Now().Local().Clock())
 		fmt.Printf(" :: Host: %v, Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
