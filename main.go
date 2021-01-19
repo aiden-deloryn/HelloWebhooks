@@ -37,8 +37,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Print(time.Now().Local().Clock())
 		fmt.Printf(" :: Host: %v, Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
-		fmt.Printf("got hash: %v\n", gotHash)
-		fmt.Printf("exp hash: %s\n", expectedHash)
+		fmt.Printf("Got hash: %v\n", gotHash)
+		fmt.Printf("Exp hash: %s\n", expectedHash)
 		fmt.Printf("Hashes match? %v\n\n", hmac.Equal([]byte(gotHash), []byte(expectedHash)))
 
 		fmt.Fprintf(w, "Success\n")
