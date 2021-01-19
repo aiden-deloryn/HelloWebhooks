@@ -31,8 +31,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		gotHash := strings.Split(r.Header.Get("X-Hub-Signature-256"), "=")[1]
 		reqBody, _ := ioutil.ReadAll(r.Body)
-		hash := hmac.New(sha256.New, []byte("123456"+string(reqBody)))
-		// hash.Write(reqBody)
+		hash := hmac.New(sha256.New, []byte("123456"))
+		hash.Write(reqBody)
 		expectedHash := hex.EncodeToString(hash.Sum(nil))
 
 		fmt.Print(time.Now().Local().Clock())
