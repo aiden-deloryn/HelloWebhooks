@@ -2,7 +2,7 @@ package main
 
 import (
 	"crypto/hmac"
-	"crypto/sha1"
+	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
@@ -36,7 +36,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 		gotHash := r.Header.Get("X-Hub-Signature-256")
 		reqBody, _ := ioutil.ReadAll(r.Body)
-		hash := hmac.New(sha1.New, []byte("123456"))
+		hash := hmac.New(sha256.New, []byte("123456"))
 		hash.Write(reqBody)
 		expectedHash := hex.EncodeToString(hash.Sum(nil))
 
