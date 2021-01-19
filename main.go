@@ -24,8 +24,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "POST":
-		fmt.Print(time.Now())
-		fmt.Printf(":: Method: %v, URL: %v", r.Method, r.URL)
+		fmt.Print(time.Now().Local().Clock())
+		fmt.Printf(" :: Host: %v Method: %v, URL: %v\n", r.Host, r.Method, r.URL)
 		fmt.Fprintf(w, "Success\n")
 	default:
 		fmt.Fprintf(w, "Sorry, only POST methods are supported.")
