@@ -1,0 +1,4 @@
+tasks:
+- image: adamrehn/ue4-full:4.25.3-opengl
+  steps:
+  - command: ["echo", "demo-project: no-op step"]
